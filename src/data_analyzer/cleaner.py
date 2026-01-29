@@ -32,11 +32,13 @@ class DataCleaner:
         except FileNotFoundError:
             raise FileNotFoundError(f"File not found: {filepath}")
 
-    def clean_data(self, drop_na_cols: Optional[List[str]] = None) -> pd.DataFrame:
+    def clean_data(
+        self, drop_na_cols: Optional[List[str]] = None
+    ) -> pd.DataFrame:  # noqa: E501
         """
-        :param drop_na_cols: List of column names to check for NaNs. 
+        :param drop_na_cols: List of column names to check for NaNs.
                             If None, drops rows where ANY column is NaN.
-        
+
         Perform standard cleaning operations:
         1. Normalize column names (lowercase, spaces to underscores)
         2. Remove duplicate rows
@@ -63,8 +65,9 @@ class DataCleaner:
 
         final_rows = len(self.df)
         # 替换 print 为 logging
-        logger.info(f"Cleaned data: Removed {initial_rows - dedup_rows} duplicates, "
-                    f"{dedup_rows - final_rows} rows with missing values.")
-        
+        logger.info(
+            f"Cleaned data: Removed {initial_rows - dedup_rows} duplicates, "
+            f"{dedup_rows - final_rows} rows with missing values."
+        )
 
         return self.df

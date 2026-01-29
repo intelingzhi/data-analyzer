@@ -61,13 +61,15 @@ def test_clean_data_with_subset(messy_data):
     """Test cleaning with specific columns for dropna."""
     # Row 4: NaN Name, 40 Age, Chicago City
     # Row 5: Charlie Name, 35 Age, None City
-    
+
     cleaner = DataCleaner(messy_data)
-    
+
     # 只根据 'Name ' (normalized to 'name') 去除空值
     # Row 4 (NaN Name) 应该被删掉
     # Row 5 (None City) 应该保留
-    cleaned_df = cleaner.clean_data(drop_na_cols=['name'])
-    
-    assert len(cleaned_df) == 3  # Alice, Bob, Charlie (Bob is OK, Row 3 duplicate dropped)
-    assert 'Charlie' in cleaned_df['name'].values
+    cleaned_df = cleaner.clean_data(drop_na_cols=["name"])
+
+    assert (
+        len(cleaned_df) == 3
+    )  # Alice, Bob, Charlie (Bob is OK, Row 3 duplicate dropped)
+    assert "Charlie" in cleaned_df["name"].values
